@@ -89,10 +89,6 @@ class MainActivity : AppCompatActivity() {
                 page.translationX = position * -offsetPx
             }
         }
-        //뷰페이저 끝
-
-        //드로우어 사용
-        //예술의 혼
 
         binding.run {
             fragment2Btn.setOnClickListener {
@@ -107,10 +103,6 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         sliderImageHandler.postDelayed(sliderImageRunnable,500)
     }
-    override fun onPause() {
-        super.onPause()
-        sliderImageHandler.removeCallbacks(sliderImageRunnable)
-    }
     //뷰페이저에 이미지 추가
     private fun getTourList(): ArrayList<Int> {
         return arrayListOf(R.drawable.viewtest, R.drawable.testbadge, R.drawable.ic_launcher_background)
@@ -122,9 +114,11 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.addToBackStack("")
         fragmentTransaction.setReorderingAllowed(true)
         fragmentTransaction.commit()
+        onPause()
     }
      //안드로이드에서 제공하는 onKeyDown 재정의 하려고 사용함 override로
-     // 뒤로가기 눌렀을때 처리임
+     //뒤로가기 눌렀을때 처리임
+
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (binding.dlMain.isDrawerOpen(GravityCompat.END)) {

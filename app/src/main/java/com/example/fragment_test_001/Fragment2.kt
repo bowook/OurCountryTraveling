@@ -2,6 +2,7 @@ package com.example.fragment_test_001
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +29,7 @@ class Fragment2 : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Log.d("onViewCreated", "onViewCreated")
         super.onViewCreated(view, savedInstanceState)
         dataInitialize()
         val layoutManager = LinearLayoutManager(context)
@@ -145,8 +147,16 @@ class Fragment2 : Fragment() {
         }
         recyclerView.adapter = adapter
     }
+    override fun onResume() {
+        Log.d("onViewCreated", "onResume")
+        super.onResume()
 
+        val newPosition = 0
+        val newTitle = "오잉?"
+        areaArrayList[newPosition].title = newTitle
 
+        adapter.notifyItemChanged(newPosition)
+    }
     private fun dataInitialize() {
         areaArrayList = arrayListOf<Model>()
 
